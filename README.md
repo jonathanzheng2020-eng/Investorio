@@ -8,6 +8,7 @@ The initial version of Investorio will include:
 - Calculate total portfolio value, total invested, profit/loss
 - Calculate individual returns and portfolio allocations
 - Save/load portfolio using CSV files
+
 Stock/ETF and other investment info will be entered manually. Operations won't include external APIs, GUIs, and databases.
 ## Future Plans
 Potential improvements for future versions might include:
