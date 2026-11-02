@@ -17,11 +17,11 @@ Potential improvements for future versions might include:
 - Display historical performance over time (ex: your portfolio right now vs. your portfolio 10 years ago)
 - Adding filters and different ways to sort your investments. 
 ## Tech Stack
-**Language:** Java
-**IDE:** VS Code
-**Version Control:** Git & GitHub
-**Collection:** ArrayList for investment record storage
-**User Input:** Scanner for terminal input
-**Data Storage:** CSV Files
-**File Handling:** PrintWriter, File for reading and writing CSV files
-**Formatting:** NumberFormat
+- **Language:** Java
+- **IDE:** VS Code
+- **Version Control:** Git & GitHub
+- **Collection:** ArrayList for investment record storage
+- **User Input:** Scanner for terminal input
+- **Data Storage:** CSV Files
+- **File Handling:** PrintWriter, File for reading and writing CSV files
+- **Formatting:** NumberFormat
