@@ -39,4 +39,42 @@ public class Investment {
     public String getTicker() {
         return ticker;
     }
+
+    public double getShares() {
+        return shares;
+    }
+
+    public double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public double getCurrentPrice() {
+        return currentPrice;
+    }
+
+    // Calculations ------------------------
+
+    /** shares * currentPrice */
+    public double getCurrentValue() {
+        return shares * currentPrice;
+    }
+
+    /** shares * purchase price */
+    public double getTotalCost() {
+        return shares * purchasePrice;
+    }
+
+    /** current value - total purchase cost */
+    public double getProfitLoss() {
+        return getCurrentValue() - getTotalCost();
+    }
+
+    /** (profit/loss / total cost) * 100 (percentage) */
+    public double getPercentReturn() {
+        double cost = getTotalCost();
+        if (cost == 0) {
+            return 0;
+        }
+        return (getProfitLoss() / cost) * 100;
+    }
 }
