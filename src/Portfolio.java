@@ -138,4 +138,23 @@ public class Portfolio {
         
         System.out.println();
     }
+
+    // displays portfolio totals
+    public void displaySummary() {
+        if (investments.isEmpty()) {
+            System.out.println("Your portfolio is empty.");
+            return;
+        }
+
+        System.out.println();
+
+        System.out.println("===== PORTFOLIO SUMMARY =====");
+        System.out.println("Investments:     " + investments.size());
+        System.out.println("Total Invested:  " + formatCurrency(getTotalInvested()));
+        System.out.println("Total Value:     " + formatCurrency(getTotalValue()));
+        System.out.println("Profit/Loss:     " + formatCurrency(getTotalProfitLoss()));
+        System.out.println("Total Return:    " + formatPercent(getTotalReturnPercent()));
+        
+        System.out.println();
+    }
 }
