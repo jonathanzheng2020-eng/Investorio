@@ -77,4 +77,10 @@ public class Investment {
         }
         return (getProfitLoss() / cost) * 100;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s: %.4f shares @ %.2f (now %.2f)",
+                ticker, shares, purchasePrice, currentPrice);
+    }
 }
