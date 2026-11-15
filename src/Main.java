@@ -76,6 +76,28 @@ public class Main {
         }
     }
 
+    private static void removeInvestment(Portfolio portfolio) {
+        if (portfolio.isEmpty()) {
+            System.out.println("Your portfolio's empty. Nothing to remove from here.");
+            return;
+        }
+
+        System.out.print("Ticker to remove: ");
+        String ticker = SCANNER.nextLine().trim();
+
+        if (portfolio.removeInvestment(ticker)) {
+            System.out.println("Removed " + ticker.toUpperCase() + ".");
+        } else {
+            System.out.println("No investment found with ticker \"" + ticker + "\".");
+        }
+    }
+
+    private static void savePortfolio(Portfolio portfolio) {
+        try {
+            FileManager.save(portfolio, FILENAME);
+        }
+    }
+
 
     // prompts until valid number or "cancel", zero is allowed if true, negatives aren't
     //return NaN if cancelled
