@@ -95,6 +95,21 @@ public class Main {
     private static void savePortfolio(Portfolio portfolio) {
         try {
             FileManager.save(portfolio, FILENAME);
+            System.out.println("Portfolio saved to " + FILENAME + ".");
+        } catch (IOException e) {
+            System.out.println("Could not save portfolio: " + e.getMessage());
+        }
+    }
+
+    private static Portfolio loadPortfolio(Portfolio currentPortfolio) {
+        try {
+            Portfolio loadedPortfolio = FileManager.load(FILENAME);
+            System.out.println("Loaded " + loadedPortfolio.size() + " investments from " + FILENAME + ".");
+            return loadedPortfolio;
+        } catch (FileNotFoundException e) {
+            System.out.println("No saved portfolio found (" + FILENAME + " doesn't exist yet). "
+                    + "Save one first.");
+            return currentPortfolio;
         }
     }
 
