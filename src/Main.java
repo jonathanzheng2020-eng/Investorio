@@ -17,7 +17,41 @@ public class Main {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
+        Portfolio portfolio = new Portfolio();
+        boolean inPlay = true;
 
+        while (inPlay) {
+            printMenu();
+            String choice = SCANNER.nextLine().trim();
+
+            switch (choice) {
+                case "1":
+                    addInvestment(portfolio);
+                    break;
+                case "2":
+                    removeInvestment(portfolio);
+                    break;
+                case "3":
+                    portfolio.displayAll();
+                    break;
+                case "4":
+                    portfolio.displaySummary();
+                    break;
+                case "5":
+                    savePortfolio(portfolio);
+                    break;
+                case "6":
+                    portfolio = loadPortfolio(portfolio);
+                    break;
+                case "7":
+                    inPlay = false;
+                    System.out.println("Goodbye.");
+                    break;
+                default:
+                    System.out.println("Invalid. Please enter a number from 1-7.");
+            }
+        }
+        SCANNER.close();
     }
 
     private static void printMenu() {
