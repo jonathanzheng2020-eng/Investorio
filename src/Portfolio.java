@@ -106,7 +106,7 @@ public class Portfolio {
     }
 
     private String formatPercent(double percent) {
-        return String.format("%+.2f%", percent);
+        return String.format("%+.2f%%", percent);
     }
 
     // displays a table of the investments in portfolio
