@@ -96,7 +96,7 @@ public class Portfolio {
         if (total == 0) {
             return 0;
         }
-        return (investment.getCurrentValue() / total);
+        return (investment.getCurrentValue() / total) * 100;
     }
 
     // Formatting & Display -----------------------
