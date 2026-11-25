@@ -146,3 +146,16 @@ NVDA,3.0,120.0,145.0
 ```
  
 To load instantly, save the lines above as `portfolio.csv` in the `src` folder, run the program, and choose 6.
+
+## Roadmap
+ 
+- [x] Create the `Investment` class
+- [x] Create the `Portfolio` class that stores investments
+- [x] Calculate value, profit/loss, returns, and allocations
+- [x] Build the terminal menu for adding, removing, and viewing investments
+- [x] Save and load the portfolio using CSV files
+- [x] Test normal inputs and edge cases (empty portfolio, missing file, invalid input)
+- [x] Implement sorting/filtering to better navigate through investment portfolio
+- [ ] Add a GUI
+- [ ] Retrieve live prices using an API
+- [ ] Display historical performance over time (your portfolio now vs. 10 years ago)
