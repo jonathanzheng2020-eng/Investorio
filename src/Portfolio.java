@@ -108,6 +108,13 @@ public class Portfolio {
     private String formatPercent(double percent) {
         return String.format("%+.2f%%", percent);
     }
+    
+    private String formatShares(double shares) {
+        if (shares == Math.floor(shares)) {
+            return String.valueOf((long) shares);
+        }
+        return String.valueOf(shares);
+    }
 
     // displays a table of the investments in portfolio
     public void displayAll() {
@@ -185,6 +192,35 @@ public class Portfolio {
         }
 
         System.out.println();
-        
+        System.out.println("Investments sorted by value:");
+        System.out.println();
+
+        for (Investment investment : getSortedByValue()) {
+            System.out.printf("%-6s - %s%n",
+                    investment.getTicker(),
+                    formatCurrency(investment.getCurrentValue()));
+        }
+
+        System.out.println();
+    }
+
+    public void displayByTicker(String ticker) {
+        boolean found = false;
+
+        for (Investment investment : investments) {
+            if (investment.getTicker().equalsIgnoreCase(ticker.trim())) {
+                System.out.println();
+                System.out.println(investment.getTicker());
+                System.out.println("Shares: " + formatShares(investment.getShares()));
+                System.out.println("Current Value: " + formatCurrency(investment.getCurrentValue()));
+                System.out.println("Profit/Loss: " + formatCurrency(investment.getProfitLoss()));
+                System.out.println();
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Investment not found.");
+        }
     }
 }
