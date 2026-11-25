@@ -14,6 +14,8 @@ import java.util.Scanner;
 
 public class Main {
     private static final String FILENAME = "portfolio.csv";
+
+    // One shared Scanner: a second Scanner on System.in can swallow buffered input.
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -78,7 +80,7 @@ public class Main {
     }
 
     private static void addInvestment(Portfolio portfolio) {
-        System.out.println("Ticker symbol (ex. AAPL): ");
+        System.out.print("Ticker symbol (ex. AAPL): ");
         String ticker = SCANNER.nextLine().trim();
         
         if (ticker.isEmpty()) {
@@ -96,7 +98,7 @@ public class Main {
             return;
         }
 
-        double purchasePrice = readDouble("Purchase price per shares: ", false);
+        double purchasePrice = readDouble("Purchase price per share: ", false);
         if (Double.isNaN(purchasePrice)) {
             return;
         }
@@ -148,17 +150,19 @@ public class Main {
             Portfolio loadedPortfolio = FileManager.load(FILENAME);
             System.out.println("Loaded " + loadedPortfolio.size() + " investments from " + FILENAME + ".");
             return loadedPortfolio;
-        } catch (FileNotFoundException e) {
+        } 
+        // Return the current portfolio on failure so a bad load never wipes the user's data
+        catch (FileNotFoundException e) {
             System.out.println("No saved portfolio found (" + FILENAME + " doesn't exist yet). "
                     + "Save one first.");
             return currentPortfolio;
         }
     }
 
-
+    // NaN is the "user cancelled" signal because it can never be a valid answer
     // prompts until valid number or "cancel", zero is allowed if true, negatives aren't
     //return NaN if cancelled
-    private static double readDouble(String prompt, boolean zero) {
+    private static double readDouble(String prompt, boolean allowZero) {
         while (true) {
             System.out.print(prompt);
             String input = SCANNER.nextLine().trim();
@@ -173,8 +177,8 @@ public class Main {
                 if (Double.isNaN(value) || Double.isInfinite(value)) {
                     System.out.println("Please enter a real number (or type 'cancel').");
                 } 
-                else if (value < 0 || (value == 0 && !zero)) {
-                    if (zero) {
+                else if (value < 0 || (value == 0 && !allowZero)) {
+                    if (allowZero) {
                         System.out.println("Can't be negative. Try again (or type 'cancel').");
                     } 
                     else {

@@ -42,7 +42,7 @@ public class Portfolio {
         return investments.size();
     }
 
-    //returns reads only so outside code can't modify list
+    //returns a copy so other classes can't modify the real list
     public List<Investment> getInvestments() {
         return new ArrayList<>(investments);
     }
@@ -91,6 +91,7 @@ public class Portfolio {
         return (getTotalProfitLoss() / invested) * 100;
     }
 
+    // Avoids dividing by zero when the portfolio is empty
     public double getAllocation(Investment investment) {
         double total = getTotalValue();
         if (total == 0) {
@@ -167,19 +168,21 @@ public class Portfolio {
 
     // Sorting ------------------
 
+    // Hand-written selection sort 
+    // Sorts a copy so the portfolio's original order and the saved CSV never changes.    
     public List<Investment> getSortedByValue() {
         ArrayList<Investment> sorted = new ArrayList<>(investments);
 
         for (int i = 0; i < sorted.size() - 1; i++) {
-            int max = i;
+            int maxIndex = i;
             for (int j = i + 1; j < sorted.size(); j++) {
-                if (sorted.get(j).getCurrentValue() > sorted.get(max).getCurrentValue()) {
-                    max = j;
+                if (sorted.get(j).getCurrentValue() > sorted.get(maxIndex).getCurrentValue()) {
+                    maxIndex = j;
                 }
             }
             Investment temporary = sorted.get(i);
-            sorted.set(i, sorted.get(max));
-            sorted.set(max, temporary);
+            sorted.set(i, sorted.get(maxIndex));
+            sorted.set(maxIndex, temporary);
         }
 
         return sorted;

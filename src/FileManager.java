@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- * Read adn writes portfolio as CSV file
+ * Read and writes portfolio as CSV file
  * 
  * Jonathan Zheng
  * CS 193 Final
@@ -29,6 +29,7 @@ public class FileManager {
                         investment.getCurrentPrice());
             }
 
+            //PrintWriter swallows I/O errors instead of throwing them, so we have to check.
             if (writer.checkError()) {
                 throw new IOException("Error while writing to " + filename);
             }
@@ -72,9 +73,12 @@ public class FileManager {
                     );
 
                     if (!portfolio.addInvestment(investment)) {
-                        throw new IllegalArgumentException("Duplication Ticker: " + investment.getTicker());
+                        throw new IllegalArgumentException("Duplicate Ticker: " + investment.getTicker());
                     }
-                } catch (IllegalArgumentException e) {
+                } 
+                // NumberFormatException and Investment's validation errors are both
+                // IllegalArgumentExceptions, so one catch skips any bad line and keeps loading.
+                catch (IllegalArgumentException e) {
                     System.out.println("Skipping line " + lineNum + ": " + e.getMessage());
                 }
             }
