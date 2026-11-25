@@ -157,4 +157,34 @@ public class Portfolio {
         
         System.out.println();
     }
+
+    // Sorting ------------------
+
+    public List<Investment> getSortedByValue() {
+        ArrayList<Investment> sorted = new ArrayList<>(investments);
+
+        for (int i = 0; i < sorted.size() - 1; i++) {
+            int max = i;
+            for (int j = i + 1; j < sorted.size(); j++) {
+                if (sorted.get(j).getCurrentValue() > sorted.get(max).getCurrentValue()) {
+                    max = j;
+                }
+            }
+            Investment temporary = sorted.get(i);
+            sorted.set(i, sorted.get(max));
+            sorted.set(max, temporary);
+        }
+
+        return sorted;
+    }
+
+    public void displaySortedByValue() {
+        if (investments.isEmpty()) {
+            System.out.println("Your portfolio is empty.");
+            return;
+        }
+
+        System.out.println();
+        
+    }
 }
