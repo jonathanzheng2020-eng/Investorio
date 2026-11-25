@@ -47,8 +47,14 @@ public class Main {
                     inPlay = false;
                     System.out.println("Goodbye.");
                     break;
+                case "8":
+                    portfolio.displaySortedByValue();
+                    break;
+                case "9":
+                    searchByTicker(portfolio);
+                    break;
                 default:
-                    System.out.println("Invalid. Please enter a number from 1-7.");
+                    System.out.println("Invalid. Please enter a number from 1-9.");
             }
         }
         SCANNER.close();
@@ -65,6 +71,8 @@ public class Main {
         System.out.println("5. Save Portfolio");
         System.out.println("6. Load Portfolio");
         System.out.println("7. Exit");
+        System.out.println("8. Sort Investments by Value");
+        System.out.println("9. Search Investments by Ticker");
         System.out.println();
         System.out.print("Enter your choice: ");
     }
@@ -180,5 +188,22 @@ public class Main {
                 System.out.println("Not a valid number. Try again (or type 'cancel').");
             }
         }
+    }
+
+    private static void searchByTicker(Portfolio portfolio) {
+        if (portfolio.isEmpty()) {
+            System.out.println("Your portfolio is empty. Nothing to search.");
+            return;
+        }
+
+        System.out.print("Enter ticker to search: ");
+        String ticker = SCANNER.nextLine().trim();
+
+        if (ticker.isEmpty()) {
+            System.out.println("Ticker cannot be empty.");
+            return;
+        }
+
+        portfolio.displayByTicker(ticker);
     }
 }

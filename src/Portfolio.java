@@ -108,6 +108,13 @@ public class Portfolio {
     private String formatPercent(double percent) {
         return String.format("%+.2f%%", percent);
     }
+    
+    private String formatShares(double shares) {
+        if (shares == Math.floor(shares)) {
+            return String.valueOf((long) shares);
+        }
+        return String.valueOf(shares);
+    }
 
     // displays a table of the investments in portfolio
     public void displayAll() {
@@ -156,5 +163,64 @@ public class Portfolio {
         System.out.println("Total Return:    " + formatPercent(getTotalReturnPercent()));
         
         System.out.println();
+    }
+
+    // Sorting ------------------
+
+    public List<Investment> getSortedByValue() {
+        ArrayList<Investment> sorted = new ArrayList<>(investments);
+
+        for (int i = 0; i < sorted.size() - 1; i++) {
+            int max = i;
+            for (int j = i + 1; j < sorted.size(); j++) {
+                if (sorted.get(j).getCurrentValue() > sorted.get(max).getCurrentValue()) {
+                    max = j;
+                }
+            }
+            Investment temporary = sorted.get(i);
+            sorted.set(i, sorted.get(max));
+            sorted.set(max, temporary);
+        }
+
+        return sorted;
+    }
+
+    public void displaySortedByValue() {
+        if (investments.isEmpty()) {
+            System.out.println("Your portfolio is empty.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("Investments sorted by value:");
+        System.out.println();
+
+        for (Investment investment : getSortedByValue()) {
+            System.out.printf("%-6s - %s%n",
+                    investment.getTicker(),
+                    formatCurrency(investment.getCurrentValue()));
+        }
+
+        System.out.println();
+    }
+
+    public void displayByTicker(String ticker) {
+        boolean found = false;
+
+        for (Investment investment : investments) {
+            if (investment.getTicker().equalsIgnoreCase(ticker.trim())) {
+                System.out.println();
+                System.out.println(investment.getTicker());
+                System.out.println("Shares: " + formatShares(investment.getShares()));
+                System.out.println("Current Value: " + formatCurrency(investment.getCurrentValue()));
+                System.out.println("Profit/Loss: " + formatCurrency(investment.getProfitLoss()));
+                System.out.println();
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Investment not found.");
+        }
     }
 }
