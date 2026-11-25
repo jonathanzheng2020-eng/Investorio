@@ -17,19 +17,22 @@ public class Investment {
 
     public Investment(String ticker, double shares, double purchasePrice, double currentPrice) {
         //exception handling
+        //Purchase price must be > 0 because percent return divides by the cost.
+        //Current price may be 0, since a stock can drop to zero.
         if (ticker == null || ticker.trim().isEmpty()) {
             throw new IllegalArgumentException("Ticker can't be empty.");
         }
-        if (Double.isNaN(shares) || Double.isInfinite(shares) || shares <= 0) {
+        if (!Double.isFinite(shares) || shares <= 0) {
             throw new IllegalArgumentException("Shares must be greater than zero.");
         }
-        if (Double.isNaN(purchasePrice) || Double.isInfinite(purchasePrice) || purchasePrice <= 0) {
+        if (!Double.isFinite(purchasePrice) || purchasePrice <= 0) {
             throw new IllegalArgumentException("Purchase price must be greater than zero.");
         }
-        if (Double.isNaN(currentPrice) || Double.isInfinite(currentPrice) || currentPrice < 0) {
+        if (!Double.isFinite(currentPrice) || currentPrice < 0) {
             throw new IllegalArgumentException("Current price can't be negative.");
         }
-
+        
+        //Uppercased once here so lookups and saved files stay consistent
         this.ticker = ticker.trim().toUpperCase();
         this.shares = shares;
         this.purchasePrice = purchasePrice;
@@ -78,9 +81,4 @@ public class Investment {
         return (getProfitLoss() / cost) * 100;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s: %.4f shares @ %.2f (now %.2f)",
-                ticker, shares, purchasePrice, currentPrice);
-    }
 }
