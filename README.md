@@ -1,11 +1,11 @@
 # Investorio
 
-A Java terminal application that lets users manage their stock and index fund investments by recording their holdings, purchase prices, and current prices. It'll calculate their total portfolio value, profit/loss, percent returns, and the allocations of each investment. It'll also allow users to save and load their portfolio using CSV files.
+A Java terminal application that lets users manage their stock and index fund investments, as well as saving/loading created portfolios.
 
 ## The Problem
 
 Many investing brokerages such as Fidelity and Acorns have very convoluted statistics pages showing the performance of their portfolios.  Calculating the total value and gains/losses of each individual investments is very tedious as your portfolio grows. 
-This application will allow users to record their investments and calculate their portfolio value, profit or loss, and allocations. You can also save your portfolio to a CSV file and load it again later.
+This application will allow users to record their investments, calculate their portfolio value, profit or loss, and allocations, and save/load through CSV files. This will serve as an effective way to display one's performance in the market without confusing them too hard.
 
 ## How It Works
 
