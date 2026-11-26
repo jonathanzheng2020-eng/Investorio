@@ -159,3 +159,8 @@ To load instantly, save the lines above as `portfolio.csv` in the `src` folder, 
 - [ ] Add a GUI
 - [ ] Retrieve live prices using an API
 - [ ] Display historical performance over time (your portfolio now vs. 10 years ago)
+- [ ] Brokerage app integration
+
+## Video Demo
+
+[Investorio Walkthrough](https://www.youtube.com/watch?v=HBDMLXF8H0g)
